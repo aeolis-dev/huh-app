@@ -5,17 +5,20 @@
 // gestures. You can also use WidgetTester to find child widgets in the widget
 // tree, read text, and verify that the values of widget properties are correct.
 
-import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import 'package:huh_app/main.dart';
 
 void main() {
-  testWidgets('MyApp displays Hello world', (WidgetTester tester) async {
+  testWidgets('App settings screen displays correctly', (WidgetTester tester) async {
     // Build our app and trigger a frame.
-    await tester.pumpWidget(MyApp());
+    await tester.pumpWidget(
+      ProviderScope(child: MainApp()),
+    );
 
-    // Verify that the text 'Hello world' is displayed.
-    expect(find.text('Hello world'), findsOneWidget);
+    // Verify that the settings screen is displayed.
+    expect(find.text('Huh App Settings'), findsOneWidget);
+    expect(find.text('Launch Voice Assistant'), findsOneWidget);
   });
 }

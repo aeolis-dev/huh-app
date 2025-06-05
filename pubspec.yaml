@@ -13,6 +13,14 @@ dependencies:
     sdk: flutter
   flutter_riverpod: ^3.0.0-dev.15
   riverpod_annotation: ^3.0.0-dev.15
+  # For floating window functionality
+  flutter_overlay_window: ^0.5.0
+  # For speech-to-text functionality
+  speech_to_text: ^7.0.0
+  # For storing settings and data
+  shared_preferences: ^2.2.2
+  # For HTTP requests to ChatGPT (when API key is added later)
+  # http: ^1.1.0
 
 dev_dependencies:
   flutter_test:
@@ -21,3 +29,6 @@ dev_dependencies:
   custom_lint:
   riverpod_generator: ^3.0.0-dev.15
   riverpod_lint: ^3.0.0-dev.15
+
+flutter:
+  uses-material-design: true

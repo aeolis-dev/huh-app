@@ -1,40 +1,71 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:riverpod_annotation/riverpod_annotation.dart';
 
-part 'main.g.dart';
 
-// We create a "provider", which will store a value (here "Hello world").
-// By using a provider, this allows us to mock/override the value exposed.
-@riverpod
-String helloWorld(Ref ref) {
-  return 'Hello world';
-}
+import 'presentation/screens/floating_window.dart';
+import 'presentation/screens/settings_screen.dart';
 
+/// Entry point for the main app - shows settings screen
 void main() {
   runApp(
-    // For widgets to be able to read providers, we need to wrap the entire
-    // application in a "ProviderScope" widget.
-    // This is where the state of our providers will be stored.
+    // ProviderScope is necessary for Riverpod to work
     ProviderScope(
-      child: MyApp(),
+      child: const MainApp(),
     ),
   );
 }
 
-// Extend ConsumerWidget instead of StatelessWidget, which is exposed by Riverpod
-class MyApp extends ConsumerWidget {
-  @override
-  Widget build(BuildContext context, WidgetRef ref) {
-    final String value = ref.watch(helloWorldProvider);
+/// Entry point for the floating overlay window
+@pragma("vm:entry-point")
+void overlayMain() {
+  runApp(
+    // ProviderScope is also needed for providers within the overlay
+    ProviderScope(
+      child: const FloatingWindowApp(),
+    ),
+  );
+}
 
+/// Main app that shows when the user wants to access settings
+class MainApp extends StatelessWidget {
+  const MainApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        appBar: AppBar(title: const Text('Example')),
-        body: Center(
-          child: Text(value),
+      title: 'Huh App Settings',
+      theme: ThemeData.dark(
+        useMaterial3: true,
+      ).copyWith(
+        // Modern dark theme for night viewing
+        colorScheme: ColorScheme.fromSeed(
+          seedColor: Colors.blue,
+          brightness: Brightness.dark,
+        ),
+        scaffoldBackgroundColor: Colors.black,
+        appBarTheme: const AppBarTheme(
+          backgroundColor: Colors.black,
+          foregroundColor: Colors.white,
         ),
       ),
+      home: const SettingsScreen(),
+    );
+  }
+}
+
+/// Floating window app that shows the voice interface
+class FloatingWindowApp extends StatelessWidget {
+  const FloatingWindowApp({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return MaterialApp(
+      title: 'Huh Voice Assistant',
+      theme: ThemeData.dark(
+        useMaterial3: true,
+      ),
+      home: const FloatingWindow(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
