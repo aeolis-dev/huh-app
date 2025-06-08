@@ -85,15 +85,15 @@ class _FloatingWindowState extends ConsumerState<FloatingWindow> {
           height: 120,
           decoration: BoxDecoration(
             // Glassy, translucent effect
-            color: Colors.black.withValues(alpha: 0.8),
+            color: Theme.of(context).colorScheme.surface.withOpacity(0.8),
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
-              color: Colors.white.withValues(alpha: 0.2),
+              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
               width: 1,
             ),
             boxShadow: [
               BoxShadow(
-                color: Colors.black.withValues(alpha: 0.3),
+                color: Theme.of(context).colorScheme.shadow.withOpacity(0.3),
                 blurRadius: 10,
                 spreadRadius: 2,
               ),
@@ -115,9 +115,9 @@ class _FloatingWindowState extends ConsumerState<FloatingWindow> {
                         // Settings button
                         IconButton(
                           onPressed: _handleSettings,
-                          icon: const Icon(
+                          icon: Icon(
                             Icons.settings,
-                            color: Colors.white70,
+                            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
                             size: 20,
                           ),
                         ),
@@ -137,19 +137,19 @@ class _FloatingWindowState extends ConsumerState<FloatingWindow> {
                                         ),
                                       ),
                                       const SizedBox(width: 8),
-                                      const Text(
+                                      Text(
                                         'Listening...',
                                         style: TextStyle(
-                                          color: Colors.white,
+                                          color: Theme.of(context).colorScheme.onSurface,
                                           fontSize: 12,
                                         ),
                                       ),
                                     ],
                                   )
-                                : const Text(
+                                : Text(
                                     'Ready',
                                     style: TextStyle(
-                                      color: Colors.white70,
+                                      color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
                                       fontSize: 12,
                                     ),
                                   ),
@@ -178,8 +178,8 @@ class _FloatingWindowState extends ConsumerState<FloatingWindow> {
                               : voiceState.recognizedText,
                           style: TextStyle(
                             color: voiceState.recognizedText.isEmpty
-                                ? Colors.white54
-                                : Colors.white,
+                                ? Theme.of(context).colorScheme.onSurface.withOpacity(0.5)
+                                : Theme.of(context).colorScheme.onSurface,
                             fontSize: 11,
                           ),
                           textAlign: TextAlign.center,

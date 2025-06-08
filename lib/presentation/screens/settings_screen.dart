@@ -47,8 +47,6 @@ class SettingsScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    // TODO: Implement dynamic theme switching here based on appSettingsProvider.isDarkMode
-    // The MaterialApp in main.dart needs to react to this setting.
     final settings = ref.watch(appSettingsProvider);
     final answer = ref.watch(answerProvider);
     
@@ -111,14 +109,17 @@ class SettingsScreen extends ConsumerWidget {
                     ),
                     const SizedBox(height: 16),
                     
-                    // Dark mode toggle
-                    SwitchListTile(
-                      title: const Text('Dark Mode'),
-                      subtitle: const Text('Enables dark theme for night viewing'),
-                      value: settings.isDarkMode,
-                      onChanged: (value) {
-                        ref.read(appSettingsProvider.notifier).toggleDarkMode();
-                      },
+                    // Theme settings
+                    Card(
+                      child: SwitchListTile(
+                        title: const Text('Dark Mode'),
+                        subtitle: const Text('Enables dark theme for night viewing'),
+                        value: settings.isDarkMode,
+                        secondary: const Icon(Icons.palette),
+                        onChanged: (value) {
+                          ref.read(appSettingsProvider.notifier).toggleDarkMode();
+                        },
+                      ),
                     ),
                     
                     const Divider(),
@@ -193,15 +194,15 @@ class SettingsScreen extends ConsumerWidget {
                       width: double.infinity,
                       padding: const EdgeInsets.all(12),
                       decoration: BoxDecoration(
-                        color: Colors.grey[900],
+                        color: Theme.of(context).colorScheme.surface,
                         borderRadius: BorderRadius.circular(8),
-                        border: Border.all(color: Colors.grey[700]!),
+                        border: Border.all(color: Theme.of(context).colorScheme.outlineVariant),
                       ),
                       child: Text(
                         answer,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 14,
-                          color: Colors.white70,
+                          color: Theme.of(context).colorScheme.onSurfaceVariant,
                         ),
                       ),
                     ),
@@ -220,7 +221,8 @@ class SettingsScreen extends ConsumerWidget {
                   exit(0);
                 },
                 style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.red,
+                  backgroundColor: Theme.of(context).colorScheme.error,
+                  foregroundColor: Theme.of(context).colorScheme.onError,
                   padding: const EdgeInsets.symmetric(vertical: 16),
                 ),
                 child: const Text('Close App'),
