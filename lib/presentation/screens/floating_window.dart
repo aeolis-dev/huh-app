@@ -85,15 +85,15 @@ class _FloatingWindowState extends ConsumerState<FloatingWindow> {
           height: 120,
           decoration: BoxDecoration(
             // Glassy, translucent effect
-            color: Theme.of(context).colorScheme.surface.withOpacity(0.8),
+            color: Theme.of(context).colorScheme.surface.withValues(alpha: 0.8),
             borderRadius: BorderRadius.circular(20),
             border: Border.all(
-              color: Theme.of(context).colorScheme.onSurface.withOpacity(0.2),
+              color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.2),
               width: 1,
             ),
             boxShadow: [
               BoxShadow(
-                color: Theme.of(context).colorScheme.shadow.withOpacity(0.3),
+                color: Theme.of(context).colorScheme.shadow.withValues(alpha: 0.3),
                 blurRadius: 10,
                 spreadRadius: 2,
               ),
@@ -117,7 +117,7 @@ class _FloatingWindowState extends ConsumerState<FloatingWindow> {
                           onPressed: _handleSettings,
                           icon: Icon(
                             Icons.settings,
-                            color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                            color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
                             size: 20,
                           ),
                         ),
@@ -149,7 +149,7 @@ class _FloatingWindowState extends ConsumerState<FloatingWindow> {
                                 : Text(
                                     'Ready',
                                     style: TextStyle(
-                                      color: Theme.of(context).colorScheme.onSurface.withOpacity(0.7),
+                                      color: Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.7),
                                       fontSize: 12,
                                     ),
                                   ),
@@ -178,7 +178,7 @@ class _FloatingWindowState extends ConsumerState<FloatingWindow> {
                               : voiceState.recognizedText,
                           style: TextStyle(
                             color: voiceState.recognizedText.isEmpty
-                                ? Theme.of(context).colorScheme.onSurface.withOpacity(0.5)
+                                ? Theme.of(context).colorScheme.onSurface.withValues(alpha: 0.5)
                                 : Theme.of(context).colorScheme.onSurface,
                             fontSize: 11,
                           ),
